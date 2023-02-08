@@ -1,9 +1,23 @@
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import FinalScreen from './pages/FinalScreen';
+import Questions from './pages/Questions';
+import Settings from './pages/Settings';
 
 function App() {
   return (
-    <div>
-      <h1>Hello Quizz</h1>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/">
+          <Settings/>
+        </Route>
+        <Route path="/questions">
+          <Questions/>
+        </Route>
+        <Route path="/score">
+          <FinalScreen/>
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
