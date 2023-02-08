@@ -5,6 +5,7 @@ import Questions from './pages/Questions';
 import Settings from './pages/Settings';
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
