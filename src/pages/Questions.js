@@ -1,8 +1,14 @@
 import { Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
+import useAxios from '../hooks/useAxios'
 
 const Questions = () => {
+
+  let apiUrl = `/api.php?amount=10`
+
+  const { response, loading } = useAxios({ url: apiUrl})
+
   return (
     <Box>
       <Typography>Question 1</Typography>
