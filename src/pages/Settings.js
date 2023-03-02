@@ -9,7 +9,7 @@ const Settings = () => {
 
   const { response, error, loading } = useAxios({url:"/api_category.php"})
 
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   if (loading) {
     return (
@@ -40,7 +40,7 @@ const Settings = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    history('/questions')
+    navigate('/questions')
   };
   
   return (

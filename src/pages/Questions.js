@@ -1,8 +1,10 @@
 import { Button, CircularProgress, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import useAxios from '../hooks/useAxios'
+import { handleScoreChange } from '../redux/actions'
 
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
@@ -15,7 +17,13 @@ const Questions = () => {
   question_difficulty,
   question_type,
   amount_of_question,
+  score,
   } =useSelector(state => state);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
+  
 
   let apiUrl = `/api.php?amount=${amount_of_question}`;
 
@@ -47,7 +55,7 @@ const Questions = () => {
       );
       setOptions(answers);
     }
-  }, [response]);
+  }, [response, questionIndex]);
 
   if (loading) {
     return (
@@ -57,17 +65,32 @@ const Questions = () => {
     )
   }
 
+  const handleClickAnswer = (e) => {
+
+    const question = response.results[questionIndex];
+    if(e.target.textContent === question.correct_answer){
+      dispatch(handleScoreChange(score + 1))
+    }
+
+    if (questionIndex + 1 < response.results.length) {
+      setQuestionIndex(questionIndex + 1)
+    } else {
+      navigate('/score')
+    }
+  }
+
   return (
     <Box>
       <Typography>Question {questionIndex + 1}</Typography>
       <Typography mt={5}>{response.results[questionIndex].question}</Typography>
-      <Box mt={2}>
-        <Button variant="contained">Answer 1</Button>
-      </Box>
-      <Box mt={2}>
-        <Button variant="contained">Answer 2</Button>
-      </Box>
-      <Box mt={5}>Score 2 / 5</Box>
+      {options.map((data, id) => (
+        <Box mt={2} key={id}>
+          <Button onClick={handleClickAnswer} variant="contained">
+            {data}
+          </Button>
+        </Box>
+      ))}
+      <Box mt={5}>Score : {score} / {response.results.length}</Box>
     </Box>
   )
 }
