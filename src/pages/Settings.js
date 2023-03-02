@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import SelectField from "../components/SelectField";
 import TextFieldComp from "../components/TextFieldComp";
 import useAxios from "../hooks/useAxios";
+import './styles.css';
 
 const Settings = () => {
 
@@ -45,6 +46,9 @@ const Settings = () => {
   
   return (
 <form onSubmit={handleSubmit}>
+  <Box mt={5} mb={5}>
+    <Typography variant="h3" fontWeight="bold" className="title">Choose the settings for your Trivia Quizz :</Typography>
+  </Box>
   <SelectField options={response.trivia_categories} label='Category' />
   <SelectField options={difficultyOptions} label='Difficulty' />
   <SelectField options={typeOptions} label='Type' />
