@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import useAxios from '../hooks/useAxios'
-import { handleScoreChange } from '../redux/actions'
+import { handleAmountChange, handleScoreChange } from '../redux/actions'
 
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
@@ -80,10 +80,16 @@ const Questions = () => {
     }
   }
 
+  const handleBackToSettings = () => {
+    dispatch(handleScoreChange(0));
+    dispatch(handleAmountChange(10));
+    navigate('/');
+  }
+
   return (
     <Box>
-      <Typography>Question {questionIndex + 1}</Typography>
-      <Typography mt={5}>{decode(response.results[questionIndex].question)}</Typography>
+      <Typography variant="h6" fontWeight="bold" >Question {questionIndex + 1}</Typography>
+      <Typography variant="h6" fontWeight="bold" mb={5} mt={5}>{decode(response.results[questionIndex].question)}</Typography>
       {options.map((data, id) => (
         <Box mt={2} key={id}>
           <Button onClick={handleClickAnswer} variant="contained">
@@ -91,7 +97,13 @@ const Questions = () => {
           </Button>
         </Box>
       ))}
-      <Box mt={5}>Score : {score} / {response.results.length}</Box>
+      <Box mt={7}>
+        <Typography variant="h6">Score : {score} / {response.results.length}</Typography>
+      </Box>
+      <Box mt={7}>
+        <Button onClick={handleBackToSettings} variant="outlined">back to settings !</Button>
+      </Box>
+      
     </Box>
   )
 }
