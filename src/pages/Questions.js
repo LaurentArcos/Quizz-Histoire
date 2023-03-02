@@ -1,5 +1,6 @@
 import { Button, CircularProgress, Typography } from '@mui/material'
 import { Box } from '@mui/system'
+import { decode } from 'html-entities'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -82,11 +83,11 @@ const Questions = () => {
   return (
     <Box>
       <Typography>Question {questionIndex + 1}</Typography>
-      <Typography mt={5}>{response.results[questionIndex].question}</Typography>
+      <Typography mt={5}>{decode(response.results[questionIndex].question)}</Typography>
       {options.map((data, id) => (
         <Box mt={2} key={id}>
           <Button onClick={handleClickAnswer} variant="contained">
-            {data}
+            {decode(data)}
           </Button>
         </Box>
       ))}
