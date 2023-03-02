@@ -13,13 +13,12 @@ const FinalScreen = () => {
 
   const handleBackToSettings = () => {
     dispatch(handleScoreChange(0));
-    dispatch(handleAmountChange(10));
     navigate('/');
   }
   
   return (
     <Box mt={3}>
-      <Typography variant="h3" fontWeight="bold" mb={3}>Final Score {score}</Typography>
+      <Typography variant="h3" fontWeight="bold" mb={3}>Final Score : {score}</Typography>
       <Button onClick={handleBackToSettings} variant="outlined">back to settings !</Button>
     </Box>
   )
