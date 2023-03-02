@@ -53,7 +53,7 @@ const Settings = () => {
   <SelectField options={difficultyOptions} label='Difficulty' />
   <SelectField options={typeOptions} label='Type' />
   <TextFieldComp/>
-  <Box mt={3} width="100%" >
+  <Box mt={5} width="100%" >
     <Button fullWidth variant="contained" type="submit">
       Get Started
     </Button>
