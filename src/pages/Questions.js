@@ -1,4 +1,4 @@
-import { Button, Typography } from '@mui/material'
+import { Button, CircularProgress, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -28,6 +28,14 @@ const Questions = () => {
   }
 
   const { response, loading } = useAxios({ url: apiUrl})
+
+  if (loading) {
+    return (
+      <Box mt={20}>
+        <CircularProgress/>
+      </Box>
+    )
+  }
 
   return (
     <Box>
